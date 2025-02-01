@@ -1,0 +1,15 @@
+workflows:
+  android-workflow:
+    name: Android Build
+    environment:
+      groups:
+        - flutter_config
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release --target-platform android-arm64
+    artifacts:
+      - build/app/outputs/apk/release/*.apk
