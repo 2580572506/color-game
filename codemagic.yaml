@@ -1,0 +1,18 @@
+workflows:
+  android-workflow:
+    name: Android Build
+    environment:
+      groups:
+        - flutter_config
+      flutter: "3.16.9"
+    scripts:
+      - name: Clean project
+        script: |
+          flutter clean
+          rm -rf pubspec.lock .flutter-plugins .dart_tool
+      - name: Install dependencies
+        script: flutter pub get --verbose
+      - name: Build APK
+        script: flutter build apk --release --target-platform android-arm64
+    artifacts:
+      - build/app/outputs/apk/release/*.apk
